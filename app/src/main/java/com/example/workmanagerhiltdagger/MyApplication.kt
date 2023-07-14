@@ -21,12 +21,11 @@ class MyApplication : Application(), Configuration.Provider{
     }
 }
 
-
 class CustomWorkerFactory @Inject constructor(private val api: DemoApi): WorkerFactory() {
+
     override fun createWorker(
         appContext: Context,
         workerClassName: String,
         workerParameters: WorkerParameters
-    ): ListenableWorker = CustomWorker(api, appContext, workerParameters)
-
+    ): ListenableWorker = CustomWorker(appContext, workerParameters)
 }

@@ -49,4 +49,11 @@ object NetworkModule {
     fun provideApiService(retrofit: Retrofit): DemoApi {
         return retrofit.create(DemoApi::class.java)
     }
+
+    @Singleton
+    @Provides
+    fun provideDemoApiService(): DemoApi {
+        return Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create())
+            .build().create(DemoApi::class.java)
+    }
 }

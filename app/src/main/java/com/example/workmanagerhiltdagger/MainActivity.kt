@@ -15,12 +15,16 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.example.workmanagerhiltdagger.ui.theme.WorkManagerHiltDaggerTheme
 import dagger.hilt.android.AndroidEntryPoint
+import retrofit2.Retrofit
 import java.time.Duration
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val api = NetworkModule.provideDemoApiService()
+        Queue.tasks.add(api)
 
         val workRequest = OneTimeWorkRequestBuilder<CustomWorker>()
             .setInitialDelay(Duration.ofSeconds(10))

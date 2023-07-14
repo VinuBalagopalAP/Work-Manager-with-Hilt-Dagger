@@ -1,7 +1,6 @@
 package com.example.workmanagerhiltdagger
 
 data class Post (
-
     val userId: Int,
     val id: Int,
     val title: String,

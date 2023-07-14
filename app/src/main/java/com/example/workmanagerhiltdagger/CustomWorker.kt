@@ -10,13 +10,17 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import java.net.UnknownHostException
 
+
+
 @HiltWorker
 class CustomWorker @AssistedInject constructor(
-    @Assisted private val api: DemoApi,
     @Assisted context: Context,
     @Assisted workerParameters: WorkerParameters,
 ): CoroutineWorker(context,workerParameters) {
+
     override suspend fun doWork(): Result {
+        val api = Queue.tasks.poll();
+        println("${api.toString()}")
         return try {
             val response = api.getPost()
             if(response.isSuccessful){
@@ -35,5 +39,6 @@ class CustomWorker @AssistedInject constructor(
             Log.d("CustomWorker", "Error!")
             Result.failure(Data.Builder().putString("error", e.toString()).build())
         }
+        //return Result.success()
     }
 }
