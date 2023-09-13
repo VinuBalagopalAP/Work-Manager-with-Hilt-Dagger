@@ -20,7 +20,7 @@ class CustomWorker @AssistedInject constructor(
 
     override suspend fun doWork(): Result {
         val api = Queue.tasks.poll();
-        println("${api.toString()}")
+        println("$api")
         return try {
             val response = api.getPost()
             if(response.isSuccessful){
